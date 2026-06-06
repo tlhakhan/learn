@@ -1,0 +1,29 @@
+title: Learning Journal
+description: Notes and references as I learn new things.
+author: tlhakhan
+
+# minima is a GitHub Pages whitelisted theme; no build pipeline needed.
+theme: minima
+
+# All whitelisted on the native GitHub Pages build.
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# If this is a PROJECT page (https://<user>.github.io/<repo>/),
+# uncomment and set baseurl to "/<repo>". Leave blank for a USER page
+# (https://<user>.github.io/). This must be correct or search.json and
+# links will 404.
+baseurl: "/learn"
+
+# Show newest posts first on the home page.
+minima:
+  skin: classic
+
+# Keep build output and tooling out of the published site.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - CLAUDE.md
+  - vendor

@@ -1,0 +1,85 @@
+---
+layout: default
+title: Search
+permalink: /search/
+---
+
+<h1>Search</h1>
+
+<input
+  type="search"
+  id="search-input"
+  placeholder="Search posts by title, description, tag, or content…"
+  autocomplete="off"
+  style="width:100%;padding:0.6rem 0.8rem;font-size:1rem;box-sizing:border-box;margin-bottom:1rem;"
+/>
+
+<p id="search-status" style="color:#666;font-size:0.9rem;"></p>
+
+<ul id="search-results" style="list-style:none;padding:0;margin:0;"></ul>
+
+<script>
+(function () {
+  var indexUrl = {{ '/search.json' | relative_url | jsonify }};
+  var input = document.getElementById('search-input');
+  var results = document.getElementById('search-results');
+  var status = document.getElementById('search-status');
+  var posts = [];
+
+  function escapeHtml(s) {
+    return (s || '').replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function render(matches) {
+    if (!matches.length) {
+      results.innerHTML = '';
+      status.textContent = input.value.trim() ? 'No matches.' : '';
+      return;
+    }
+    status.textContent = matches.length + ' result' + (matches.length === 1 ? '' : 's');
+    results.innerHTML = matches.map(function (p) {
+      var tags = p.tags
+        ? '<div style="font-size:0.8rem;color:#888;margin-top:0.2rem;">' + escapeHtml(p.tags) + '</div>'
+        : '';
+      return (
+        '<li style="margin-bottom:1.2rem;">' +
+          '<a href="' + p.url + '" style="font-weight:600;font-size:1.05rem;">' + escapeHtml(p.title) + '</a>' +
+          '<span style="color:#999;font-size:0.85rem;margin-left:0.5rem;">' + escapeHtml(p.date) + '</span>' +
+          (p.description ? '<div style="color:#444;margin-top:0.2rem;">' + escapeHtml(p.description) + '</div>' : '') +
+          tags +
+        '</li>'
+      );
+    }).join('');
+  }
+
+  function search(q) {
+    q = q.trim().toLowerCase();
+    if (!q) { render([]); return; }
+    var terms = q.split(/\s+/);
+    var matches = posts.filter(function (p) {
+      var hay = (
+        (p.title || '') + ' ' +
+        (p.description || '') + ' ' +
+        (p.tags || '') + ' ' +
+        (p.content || '')
+      ).toLowerCase();
+      return terms.every(function (t) { return hay.indexOf(t) !== -1; });
+    });
+    render(matches);
+  }
+
+  fetch(indexUrl)
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      posts = data;
+      input.disabled = false;
+      var q = new URLSearchParams(window.location.search).get('q');
+      if (q) { input.value = q; search(q); }
+    })
+    .catch(function () { status.textContent = 'Could not load the search index.'; });
+
+  input.addEventListener('input', function () { search(input.value); });
+})();
+</script>
