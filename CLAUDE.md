@@ -28,7 +28,6 @@ Each post must open with this frontmatter, then follow the section structure:
 ---
 layout: post
 title: useMemo vs useCallback
-author: tlhakhan
 date: 2026-06-06
 description: When memoizing a value beats memoizing a function, and why both exist.
 tags: [react, hooks, performance]
@@ -65,7 +64,6 @@ Links, docs, or related posts.
 
 - `layout` — always `post`.
 - `title` — short, human-readable topic name.
-- `author` — always `tlhakhan` (GitHub: https://github.com/tlhakhan).
 - `date` — ISO `YYYY-MM-DD`, matching the filename. If more than one post is
   written on the same day, append a time (`YYYY-MM-DD HH:MM:SS`) to control
   ordering — Jekyll sorts same-date posts alphabetically by filename otherwise.
