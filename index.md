@@ -1,6 +1,7 @@
 ---
 layout: home
-title: Learning Journal
+title: Notebook
+list_title: Notes
 ---
 
 A running journal of notes and references as I learn new things.
