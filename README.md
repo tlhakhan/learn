@@ -1,6 +1,6 @@
-# Learning Journal
+# Notebook
 
-A personal learning journal published as a Jekyll site on GitHub Pages with
+A personal notebook published as a Jekyll site on GitHub Pages with
 client-side search.
 
 ## Adding a post

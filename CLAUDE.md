@@ -4,7 +4,7 @@ Instructions for Claude Code working in this repository.
 
 ## What this repo is
 
-A personal **learning journal**, published as a Jekyll site on GitHub Pages.
+A personal **notebook**, published as a Jekyll site on GitHub Pages.
 Each entry is a **post** in `_posts/`. The posts are the primary artifact of
 this repo — treat writing and maintaining them as the main job.
 
