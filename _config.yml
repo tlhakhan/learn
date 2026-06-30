@@ -15,7 +15,7 @@ plugins:
 # uncomment and set baseurl to "/<repo>". Leave blank for a USER page
 # (https://<user>.github.io/). This must be correct or search.json and
 # links will 404.
-baseurl: "/learn"
+baseurl: ""
 
 # Show newest posts first on the home page.
 minima:
