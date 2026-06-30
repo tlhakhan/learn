@@ -12,9 +12,9 @@
   --bg:         #f9f7f4;
   --surface:    #ffffff;
   --text:       #1f1f1e;
-  --text-muted: #6b6b6b;
+  --text-muted: #767676;
   --border:     #e5e0d8;
-  --accent:     #c96442;
+  --accent:     #b55130;
   --accent-dim: #a0522d;
   --code-bg:    #ffffff;
   --code-text:  #2d2d2d;
@@ -287,3 +287,13 @@ pre {
   a { color: var(--text-muted); }
   a:hover { color: var(--accent); }
 }
+
+// Syntax highlighting — accessibility overrides
+
+.highlight .nb { color: #00749c; }
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cs,
+.highlight .cp,
+.highlight .cd { color: #767676; }
