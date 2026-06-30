@@ -10,8 +10,6 @@ tags: [kubernetes, cka, certification, study-plan, devops]
 
 A tailored 7-day study plan for the CKA exam (Kubernetes v1.35, target date July 9 2026), plus an exam-day reference covering allowed resources, domain weights, and doc links you can open during the exam. Assumes solid prior knowledge — focused on exam mechanics and muscle memory, not concept introductions.
 
----
-
 ## Exam setup at a glance
 
 | Item            | Detail                                                                          |
@@ -26,17 +24,15 @@ A tailored 7-day study plan for the CKA exam (Kubernetes v1.35, target date July
 | Allowed docs    | kubernetes.io/docs, kubernetes.io/blog, helm.sh/docs (one browser tab)          |
 | Simulator       | 2x Killer.sh sessions (CKA-A, CKA-B), 17 questions each, 36h access per session |
 
-**Exam version note:** re-verify the K8s version at the [LF candidate FAQ](https://docs.linuxfoundation.org/tc-docs/certification/faq-cka-ckad-cks) a few days before — it realigns 4–8 weeks after a K8s release.
+Re-verify the K8s version at the [LF candidate FAQ](https://docs.linuxfoundation.org/tc-docs/certification/faq-cka-ckad-cks) a few days before the exam — it realigns 4–8 weeks after a K8s release.
 
-**Critical exam habit:** every task starts with a context-switch command. Run it. A correct answer in the wrong cluster scores zero.
+Critical exam habit: every task starts with a context-switch command. Run it. A correct answer in the wrong cluster scores zero.
 
-> This plan assumes you already know Kubernetes internals well (kubeadm, etcd/PKI, CNI, networking). It is tuned for **exam speed, imperative fluency, and the highest-weight domains**, not for learning concepts from scratch.
-
----
+This plan assumes solid knowledge of Kubernetes internals (kubeadm, etcd/PKI, CNI, networking). It is tuned for exam speed, imperative fluency, and the highest-weight domains — not for learning concepts from scratch.
 
 ## Allowed resources during the exam
 
-Open-book, but only these sites, only through the browser inside the exam VM. No Google, Stack Overflow, GitHub, or personal notes. The docs search bar is fine, **but you must not open external search results.**
+Open-book, but restricted to these sites through the browser inside the exam VM — no Google, Stack Overflow, GitHub, or personal notes. The docs search bar is fine, but you must not open external search results.
 
 - [Kubernetes Docs](https://kubernetes.io/docs)
 - [Kubernetes Blog](https://kubernetes.io/blog/)
@@ -44,13 +40,11 @@ Open-book, but only these sites, only through the browser inside the exam VM. No
 - [Gateway API Docs](https://gateway-api.sigs.k8s.io) (CKA-only)
 - Quick Reference links shown in a given task's info box
 
-> Every per-domain link below resolves to one of these four allowed domains, so they're all usable live. The [LF candidate FAQ](https://docs.linuxfoundation.org/tc-docs/certification/faq-cka-ckad-cks) and the [CNCF curriculum](https://github.com/cncf/curriculum) are **pre-exam reference only** — they will not open during the exam.
-
----
+Every per-domain link below resolves to one of these allowed domains. The [LF candidate FAQ](https://docs.linuxfoundation.org/tc-docs/certification/faq-cka-ckad-cks) and the [CNCF curriculum](https://github.com/cncf/curriculum) are pre-exam reference only — they will not open during the exam.
 
 ## Grading breakdown + doc links
 
-Five domains. **Troubleshooting (30%) and Cluster Architecture (25%) are 55% of the exam** — spend your time accordingly. All links below are on allowed domains.
+Five domains. **Troubleshooting (30%) and Cluster Architecture (25%) are 55% of the exam** — spend your time accordingly.
 
 ### 1. Cluster Architecture, Installation & Configuration — 25%
 
@@ -106,24 +100,20 @@ Cluster/node failures, control-plane components, kubelet, networking, app failur
 - [kubelet troubleshooting](https://kubernetes.io/docs/tasks/debug/debug-cluster/kubelet/)
 - [Resource usage monitoring](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/)
 
----
-
 ## Day 0 (before Day 1)
 
-- Save **one Killer.sh session for the final dry run**. Activate the first now — each session is only 36h.
-- Set up a local 2-node kubeadm sandbox (sparkle-1 / nvidia-1 + libvirt; spin up 3 throwaway Ubuntu 24.04 VMs: 1 CP + 2 workers). You want a cluster you can **break and rebuild fast**.
-- Lock in your exam shell setup so it's automatic on exam day:
+Save one Killer.sh session for the final dry run — activate the first now, each session is only 36h. Set up a local 2-node kubeadm sandbox (1 control-plane + 2 workers on throwaway Ubuntu 24.04 VMs) so you have a cluster you can break and rebuild fast.
 
-  ```bash
-  alias k=kubectl
-  export do="--dry-run=client -o yaml"
-  export now="--force --grace-period=0"
-  source <(kubectl completion bash)
-  complete -o default -F __start_kubectl k
-  # vim: set ts=2 sw=2 et, and 'set paste' awareness for YAML
-  ```
+Lock in your exam shell setup so it's automatic on exam day:
 
----
+```bash
+alias k=kubectl
+export do="--dry-run=client -o yaml"
+export now="--force --grace-period=0"
+source <(kubectl completion bash)
+complete -o default -F __start_kubectl k
+# vim: set ts=2 sw=2 et, and 'set paste' awareness for YAML
+```
 
 ## The 7-day plan
 
@@ -155,7 +145,7 @@ Highest weight, so it goes first and gets two days.
 ### Day 3 — Cluster Architecture I (25% domain)
 
 - `kubeadm init` from scratch + join a worker. Time yourself.
-- **kubeadm upgrade** of a CP node and a worker (`kubeadm upgrade plan/apply`, drain, `apt` the kubelet/kubectl, uncordon). Near-guaranteed exam task — make it boring.
+- **kubeadm upgrade** of a control-plane node and a worker (`kubeadm upgrade plan/apply`, drain, `apt` the kubelet/kubectl, uncordon). Near-guaranteed exam task — make it boring.
 - RBAC: create a Role/ClusterRole + binding + ServiceAccount, then **verify** with `kubectl auth can-i --as=system:serviceaccount:ns:sa`.
 - **Reps target:** one clean upgrade + one RBAC grant verified by `auth can-i`.
 
@@ -186,18 +176,13 @@ Highest weight, so it goes first and gets two days.
 
 ### Day 7 — Full dry run + cleanup
 
-- **Use your second Killer.sh session as a timed 2-hour mock.** Treat it as the real thing: context-switch every task, flag-and-skip hard ones, high-weight first.
-- Review only the questions you missed; re-drill those exact mechanics.
-- Re-read the [LF candidate FAQ](https://docs.linuxfoundation.org/tc-docs/certification/faq-cka-ckad-cks) and confirm the K8s version hasn't shifted.
-- Light day otherwise. Don't cram new material the night before.
-
----
+Use your second Killer.sh session as a timed 2-hour mock. Treat it as the real thing: context-switch every task, flag-and-skip hard ones, high-weight first. Review only the questions you missed and re-drill those exact mechanics. Re-read the [LF candidate FAQ](https://docs.linuxfoundation.org/tc-docs/certification/faq-cka-ckad-cks) and confirm the K8s version hasn't shifted. Keep it a light day otherwise — don't cram new material the night before.
 
 ## Exam-day tactics
 
 - First 60 seconds: set aliases, `$do`/`$now`, completion, vim config.
 - Read each task's **weight**. Do the heavy ones first; flag and skip anything that stalls you >~8 min.
-- **Always run the provided `kubectl config use-context` line first.** Confirm with `k config current-context`.
+- Always run the provided `kubectl config use-context` line first. Confirm with `k config current-context`.
 - Bookmark the doc pages above; navigate by docs search, don't browse.
 - Imperative-first: generate YAML with `$do`, edit, apply. Hand-write only what you must (PV, NetworkPolicy, Gateway).
 - Partial credit is real — get the easy 70% of a task done rather than perfecting one.
