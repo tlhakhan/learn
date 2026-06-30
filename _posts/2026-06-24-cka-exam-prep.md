@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "CKA Exam Prep — 7-Day Plan & Reference"
+title: "CKA Exam Preparation — 7-Day Plan & Reference"
 date: 2026-06-24
 description: "7-day study schedule and exam-day reference for the Certified Kubernetes Administrator (CKA) exam, tuned for exam speed and the highest-weight domains."
 tags: [kubernetes, cka, certification, study-plan, devops]
